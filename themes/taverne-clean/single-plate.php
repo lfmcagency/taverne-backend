@@ -1,7 +1,11 @@
 <?php
 /**
  * Single Plate Template
- * Individual product/artwork view
+ *
+ * Individual plate detail page at /prints/{slug}. Two-column layout: featured image (plate-large) left,
+ * details right (title, excerpt, content, specs, taxonomies). Stacks vertically on mobile.
+ * ACF field sections for dimensions/price commented out at lines 50-64 - uncomment when ACF is configured.
+ * Uses taverne_get_plate_taxonomies() and taverne_display_taxonomy_terms() for taxonomy display.
  */
 
 get_header();

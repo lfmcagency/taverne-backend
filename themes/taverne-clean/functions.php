@@ -1,7 +1,11 @@
 <?php
 /**
- * Taverne Gallery Theme Functions
- * Lightweight, minimal setup for art gallery
+ * Taverne Clean Theme Functions
+ *
+ * Core theme setup: registers image sizes (plate-thumb through plate-hero), navigation menus (primary/footer),
+ * and custom logo support. Helper functions for taxonomy display, filter sidebar generation, and pagination.
+ * Key functions: taverne_get_plate_taxonomies(), taverne_filter_sidebar(), taverne_display_taxonomy_terms().
+ * Removes WP bloat (emojis, generator tags). All functions prefixed with 'taverne_'.
  */
 
 if (!defined('ABSPATH')) {

@@ -1,7 +1,11 @@
 <?php
 /**
  * Taxonomy Archive Template
- * Shows plates filtered by taxonomy term
+ *
+ * Filtered gallery for specific taxonomy terms (e.g., /prints/drypoint, /prints/zinc-plate).
+ * Same layout as archive-page.php but pre-filtered to term. Shows term name + description in header.
+ * Includes filter sidebar via taverne_filter_sidebar() with current term highlighted.
+ * Grid displays year, size below thumbnails. Falls back to "no results" with link to full gallery.
  */
 
 get_header();

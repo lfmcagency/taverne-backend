@@ -1,6 +1,11 @@
 <?php
 /**
- * Fallback template
+ * Index Template - Fallback
+ *
+ * WordPress fallback for uncaught post types/archives. Displays generic grid with thumbnails and excerpts.
+ * Checks is_home() or is_archive() for conditional header. Uses plate-thumb image size and plate-grid layout.
+ * Shows archive title/description when available. Includes pagination via taverne_pagination().
+ * Rarely used - most content handled by specific templates (archive-page.php, taxonomy.php, etc).
  */
 
 get_header();

@@ -1,7 +1,11 @@
 <?php
 /**
- * Page Template
- * For static pages (Artist, Researcher, Teacher, About, Contact, etc.)
+ * Page Template - Static Pages
+ *
+ * Simple centered layout for static content (Artist, Researcher, Teacher, About, Contact).
+ * Structure: page-header (title) → optional featured image (plate-large) → page-content (the_content).
+ * No sidebar or special formatting - clean canvas for longform content and custom layouts.
+ * Perfect for A/R/T pages with blocks or classic editor content.
  */
 
 get_header();

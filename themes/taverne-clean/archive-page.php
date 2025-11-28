@@ -1,7 +1,11 @@
 <?php
 /**
- * Archive template for Plate CPT
- * Main gallery view with filter sidebar
+ * Archive Template - Plate CPT
+ *
+ * Main gallery view at /prints displaying all plates in responsive grid (1-4 columns based on screen size).
+ * Includes filter sidebar (900px+) via taverne_filter_sidebar() showing all 9 taxonomies with term counts.
+ * Displays year, size, technique below each thumbnail. Uses plate-thumb image size (400×400px).
+ * Template structure: archive-header → gallery-wrapper (sidebar + grid) → pagination.
  */
 
 get_header();

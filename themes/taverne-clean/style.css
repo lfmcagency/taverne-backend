@@ -1,0 +1,593 @@
+/*
+Theme Name: Taverne Gallery
+Theme URI: https://poltaverne.com
+Author: Louis Faucher
+Author URI: https://poltaverne.com
+Description: Minimalist art gallery theme for Pol Taverne's print collection
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: taverne-gallery
+*/
+
+/* =========================================
+   RESET & BASE
+========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #2C2C2C;
+    background-color: #FFFFFF;
+    overflow-x: hidden;
+}
+
+/* =========================================
+   TYPOGRAPHY
+========================================= */
+h1, h2, h3, h4, h5, h6 {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: 700;
+    color: #000000;
+    line-height: 1.3;
+    margin-bottom: 0.75em;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+h5 { font-size: 1.1rem; }
+h6 { font-size: 1rem; }
+
+p {
+    margin-bottom: 1.25em;
+}
+
+a {
+    color: #000000;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover,
+a:focus,
+a:active {
+    color: #C74440;
+}
+
+/* =========================================
+   LAYOUT CONTAINERS
+========================================= */
+.site-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+@media (min-width: 768px) {
+    .site-container {
+        padding: 0 2rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    .site-container {
+        padding: 0 3rem;
+    }
+}
+
+/* =========================================
+   HEADER
+========================================= */
+.site-header {
+    padding: 2rem 0;
+    border-bottom: 1px solid #E8E8E8;
+    margin-bottom: 3rem;
+}
+
+.header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.site-logo {
+    max-width: 180px;
+    height: auto;
+}
+
+.site-logo img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Main Navigation */
+.main-navigation ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.main-navigation a {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+}
+
+@media (max-width: 767px) {
+    .header-inner {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .main-navigation ul {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+.site-footer {
+    margin-top: 5rem;
+    padding: 3rem 0;
+    border-top: 1px solid #E8E8E8;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.footer-nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+/* =========================================
+   GALLERY GRID
+========================================= */
+.gallery-wrapper {
+    display: flex;
+    gap: 3rem;
+    margin-top: 3rem;
+}
+
+/* Filter Sidebar */
+.filter-sidebar {
+    display: none;
+}
+
+@media (min-width: 900px) {
+    .filter-sidebar {
+        display: block;
+        width: 240px;
+        flex-shrink: 0;
+    }
+    
+    .gallery-content {
+        flex: 1;
+    }
+}
+
+.filter-group {
+    margin-bottom: 2rem;
+}
+
+.filter-group h3 {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #E8E8E8;
+}
+
+.filter-group ul {
+    list-style: none;
+}
+
+.filter-group li {
+    margin-bottom: 0.5rem;
+}
+
+.filter-group a {
+    font-size: 0.9rem;
+    display: block;
+    padding: 0.25rem 0;
+}
+
+.filter-group a:hover {
+    padding-left: 0.5rem;
+}
+
+/* Plate Grid */
+.plate-grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr;
+}
+
+@media (min-width: 600px) {
+    .plate-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2.5rem;
+    }
+}
+
+@media (min-width: 900px) {
+    .plate-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 3rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    .plate-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Plate Card */
+.plate-card {
+    position: relative;
+}
+
+.plate-card-image {
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+    overflow: hidden;
+    background: #F8F8F8;
+    margin-bottom: 1rem;
+}
+
+.plate-card-image img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.plate-card:hover .plate-card-image img {
+    transform: scale(1.03);
+}
+
+.plate-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.plate-card h3 a {
+    color: #000000;
+}
+
+.plate-meta {
+    font-size: 0.85rem;
+    color: #666666;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.taxonomy-term {
+    display: inline-block;
+    padding: 0.2rem 0;
+}
+
+.taxonomy-term::after {
+    content: "·";
+    margin-left: 0.5rem;
+    color: #CCCCCC;
+}
+
+.taxonomy-term:last-child::after {
+    content: "";
+}
+
+/* =========================================
+   SINGLE PLATE
+========================================= */
+.single-plate-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.plate-layout {
+    display: grid;
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+@media (min-width: 900px) {
+    .plate-layout {
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+    }
+}
+
+/* Plate Images */
+.plate-images {
+    position: sticky;
+    top: 2rem;
+    align-self: start;
+}
+
+.plate-featured-image {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.plate-featured-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.plate-gallery-thumbs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+}
+
+.plate-thumb {
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.2s ease;
+}
+
+.plate-thumb:hover,
+.plate-thumb.active {
+    border-color: #000000;
+}
+
+.plate-thumb img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Plate Details */
+.plate-details h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.plate-excerpt {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #E8E8E8;
+}
+
+.plate-content {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #E8E8E8;
+}
+
+/* Specifications */
+.plate-specs {
+    margin-bottom: 2rem;
+}
+
+.plate-specs h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.spec-grid {
+    display: grid;
+    gap: 1rem;
+}
+
+.spec-item {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 1rem;
+}
+
+.spec-label {
+    font-weight: 600;
+    color: #000000;
+}
+
+.spec-value {
+    color: #2C2C2C;
+}
+
+/* Taxonomies */
+.plate-taxonomies {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #E8E8E8;
+}
+
+.taxonomy-group {
+    margin-bottom: 1rem;
+}
+
+.taxonomy-group strong {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #000000;
+}
+
+.taxonomy-terms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.taxonomy-terms a {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    background: #F8F8F8;
+    border-radius: 3px;
+    font-size: 0.85rem;
+    transition: background 0.2s ease;
+}
+
+.taxonomy-terms a:hover {
+    background: #E8E8E8;
+}
+
+/* =========================================
+   BUTTONS
+========================================= */
+.btn {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    background: #000000;
+    color: #FFFFFF;
+    border: 2px solid #000000;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn:hover {
+    background: #C74440;
+    border-color: #C74440;
+    color: #FFFFFF;
+}
+
+.btn-secondary {
+    background: #FFFFFF;
+    color: #000000;
+}
+
+.btn-secondary:hover {
+    background: #000000;
+    color: #FFFFFF;
+}
+
+/* =========================================
+   PAGINATION
+========================================= */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 3rem 0;
+    padding-top: 3rem;
+    border-top: 1px solid #E8E8E8;
+}
+
+.pagination a,
+.pagination span {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border: 1px solid #E8E8E8;
+    transition: all 0.2s ease;
+}
+
+.pagination a:hover,
+.pagination .current {
+    background: #000000;
+    color: #FFFFFF;
+    border-color: #000000;
+}
+
+/* =========================================
+   ARCHIVE HEADER
+========================================= */
+.archive-header {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #E8E8E8;
+}
+
+.archive-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.archive-description {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    max-width: 800px;
+}
+
+/* =========================================
+   UTILITIES
+========================================= */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.mt-0 { margin-top: 0; }
+.mb-0 { margin-bottom: 0; }
+
+/* =========================================
+   RESPONSIVE IMAGES
+========================================= */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* =========================================
+   MOBILE OPTIMIZATIONS
+========================================= */
+@media (max-width: 599px) {
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.75rem; }
+    h3 { font-size: 1.35rem; }
+    
+    .site-header {
+        padding: 1.5rem 0;
+        margin-bottom: 2rem;
+    }
+    
+    .plate-layout {
+        gap: 2rem;
+    }
+    
+    .plate-details h1 {
+        font-size: 2rem;
+    }
+    
+    .spec-item {
+        grid-template-columns: 1fr;
+        gap: 0.25rem;
+    }
+}

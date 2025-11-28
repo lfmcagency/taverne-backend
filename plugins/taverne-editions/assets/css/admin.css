@@ -1,0 +1,613 @@
+/* Taverne Editions Admin CSS - Mobile-First, Console Font, Polished */
+
+/* ============================================
+   HIDE DEFAULT WP TAXONOMY BOXES IN SIDEBAR
+   ============================================ */
+
+#plate_techniquediv,
+#plate_mediumdiv,
+#plate_motifdiv,
+#plate_tracesdiv,
+#plate_palettediv,
+#plate_matrixdiv,
+#plate_studydiv,
+#plate_yeardiv {
+    display: none !important;
+}
+
+/* ============================================
+   GLOBAL CARD STYLES
+   ============================================ */
+
+.taverne-card-body,
+.taverne-seo-body {
+    padding: 16px;
+    background: #fff;
+}
+
+/* Console/Monospace Font for All Inputs */
+.taverne-form-row input[type="text"],
+.taverne-form-row input[type="number"],
+.taverne-form-row input[type="url"],
+.taverne-form-row select,
+.taverne-form-row textarea,
+.taverne-palette-display,
+.taverne-impression-field {
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace !important;
+}
+
+/* ============================================
+   PLATE DETAILS
+   ============================================ */
+
+.taverne-details-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+@media (min-width: 782px) {
+    .taverne-details-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.taverne-form-row {
+    display: flex;
+    flex-direction: column;
+}
+
+.taverne-form-row label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #1d2327;
+    font-size: 13px;
+}
+
+.taverne-form-row input[type="text"],
+.taverne-form-row input[type="number"],
+.taverne-form-row input[type="url"],
+.taverne-form-row select,
+.taverne-form-row textarea {
+    width: 100%;
+    padding: 6px 8px;
+    border: 1px solid #8c8f94;
+    border-radius: 3px;
+    font-size: 13px;
+    line-height: 1.5;
+    background: #fff;
+}
+
+.taverne-form-row input[readonly],
+.taverne-form-row input[disabled] {
+    background: #f6f7f7;
+    color: #646970;
+    cursor: not-allowed;
+}
+
+.taverne-form-row textarea {
+    resize: vertical;
+}
+
+.taverne-helper {
+    font-size: 11px;
+    color: #646970;
+    margin: 4px 0 0 0;
+    font-style: italic;
+}
+
+.taverne-dimensions-inline {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 10px;
+    align-items: center;
+}
+
+.taverne-separator {
+    font-size: 16px;
+    color: #8c8f94;
+    font-weight: bold;
+}
+
+.taverne-size-radios {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.taverne-radio {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    padding: 10px 14px;
+    border: 1px solid #c3c4c7;
+    border-radius: 3px;
+    background: #f6f7f7;
+    transition: all 0.2s;
+    width: 100%;
+}
+
+.taverne-radio:hover {
+    background: #e8e8e8;
+}
+
+.taverne-radio:has(input:checked) {
+    background: #2271b1;
+    border-color: #2271b1;
+    color: #fff;
+}
+
+.taverne-radio:has(input:disabled) {
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+.taverne-radio input[type="radio"] {
+    margin: 0;
+}
+
+.taverne-radio span {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.taverne-radio:has(input:checked) span {
+    color: #fff;
+}
+
+.taverne-form-row input:focus,
+.taverne-form-row select:focus,
+.taverne-form-row textarea:focus {
+    border-color: #2271b1;
+    outline: none;
+    box-shadow: 0 0 0 1px #2271b1;
+}
+
+/* ============================================
+   TECHNIQUES & CLASSIFICATIONS
+   ============================================ */
+
+.taverne-taxonomy-section {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #dcdcde;
+}
+
+.taverne-taxonomy-section:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.taverne-taxonomy-label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #1d2327;
+    font-size: 14px;
+}
+
+.taverne-checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
+
+@media (max-width: 782px) {
+    .taverne-checkbox-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.taverne-checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    border: 1px solid #c3c4c7;
+    border-radius: 3px;
+    background: #f6f7f7;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin: 0;
+}
+
+.taverne-checkbox-item:hover {
+    background: #fff;
+    border-color: #2271b1;
+}
+
+.taverne-checkbox-item:has(input:checked) {
+    background: #f0f6fc;
+    border-color: #2271b1;
+    box-shadow: 0 0 0 1px #2271b1;
+}
+
+.taverne-checkbox-item input[type="checkbox"] {
+    margin: 0;
+    cursor: pointer;
+}
+
+.taverne-checkbox-item span {
+    font-size: 13px;
+    color: #1d2327;
+}
+
+.taverne-palette-display {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #8c8f94;
+    border-radius: 3px;
+    background: #f6f7f7;
+    color: #646970;
+    font-size: 13px;
+    cursor: not-allowed;
+}
+
+/* ============================================
+   SEO CARD (SIDEBAR)
+   ============================================ */
+
+.taverne-seo-body {
+    padding: 12px;
+}
+
+.taverne-seo-body .taverne-form-row {
+    margin-bottom: 16px;
+}
+
+.taverne-seo-body .taverne-form-row:last-child {
+    margin-bottom: 0;
+}
+
+.taverne-char-count {
+    font-weight: 600;
+}
+
+.taverne-char-count #taverne-char-counter {
+    color: #2271b1;
+}
+
+.taverne-checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    padding: 8px 0;
+}
+
+.taverne-checkbox-label input[type="checkbox"] {
+    margin: 0;
+}
+
+.taverne-checkbox-label span {
+    font-size: 13px;
+    font-weight: normal;
+}
+
+/* ============================================
+   STATES & IMPRESSIONS
+   ============================================ */
+
+.taverne-states-header {
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #c3c4c7;
+}
+
+.taverne-states-summary {
+    font-size: 18px;
+    color: #1d2327;
+}
+
+.taverne-states-summary strong {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.taverne-summary-meta {
+    font-size: 12px;
+    color: #646970;
+    margin-left: 8px;
+}
+
+.taverne-empty-state {
+    padding: 40px 20px;
+    text-align: center;
+    color: #646970;
+    font-style: italic;
+    background: #f6f7f7;
+    border-radius: 3px;
+}
+
+.taverne-accordion-item {
+    border: 1px solid #c3c4c7;
+    border-radius: 3px;
+    margin-bottom: 12px;
+    background: #fff;
+}
+
+.taverne-accordion-header {
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    background: #f6f7f7;
+    transition: background 0.2s;
+}
+
+.taverne-accordion-header:hover {
+    background: #e8e8e8;
+}
+
+.taverne-accordion-header.active {
+    background: #fff;
+    border-bottom: 1px solid #c3c4c7;
+}
+
+.taverne-accordion-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+}
+
+.taverne-impression-count {
+    font-size: 12px;
+    color: #646970;
+    font-weight: normal;
+}
+
+.taverne-accordion-icons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.taverne-accordion-arrow {
+    transition: transform 0.2s;
+    color: #646970;
+}
+
+.taverne-accordion-header.active .taverne-accordion-arrow {
+    transform: rotate(180deg);
+}
+
+.taverne-accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+.taverne-accordion-content.active {
+    max-height: 10000px;
+    transition: max-height 0.5s ease-in;
+}
+
+.taverne-accordion-body {
+    padding: 16px;
+}
+
+.taverne-icon-btn {
+    background: none;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+    color: #646970;
+    transition: color 0.2s;
+}
+
+.taverne-icon-btn:hover {
+    color: #d63638;
+}
+
+.taverne-icon-btn .dashicons {
+    width: 18px;
+    height: 18px;
+    font-size: 18px;
+}
+
+.taverne-add-state {
+    margin-top: 16px;
+    width: 100%;
+}
+
+.taverne-impressions-section {
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid #dcdcde;
+}
+
+.taverne-impressions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.taverne-empty-impressions {
+    padding: 20px;
+    text-align: center;
+    color: #646970;
+    font-style: italic;
+    background: #f6f7f7;
+    border-radius: 3px;
+    font-size: 13px;
+}
+
+/* Impression Row - MOBILE FIRST STACKING */
+.taverne-impression-row {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+    background: #f6f7f7;
+    border: 1px solid #dcdcde;
+    border-radius: 3px;
+}
+
+.taverne-impression-handle {
+    display: none;
+}
+
+/* Desktop: Horizontal Grid */
+@media (min-width: 782px) {
+    .taverne-impression-row {
+        display: grid;
+        grid-template-columns: auto 60px auto 1fr auto;
+        gap: 12px;
+        align-items: start;
+        padding: 12px;
+    }
+    
+    .taverne-impression-handle {
+        display: block;
+        cursor: grab;
+        color: #8c8f94;
+        padding-top: 8px;
+    }
+}
+
+.taverne-impression-thumb {
+    width: 60px;
+    height: 60px;
+    border-radius: 2px;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #dcdcde;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.taverne-impression-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.taverne-thumb-placeholder {
+    color: #c3c4c7;
+    font-size: 24px;
+}
+
+/* ADDED: Upload trigger styling for clickable thumbnails */
+.taverne-upload-trigger {
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.taverne-upload-trigger:hover {
+    border-color: #2271b1;
+    box-shadow: 0 0 0 1px #2271b1;
+}
+
+.taverne-upload-trigger:hover .taverne-thumb-placeholder {
+    color: #2271b1;
+}
+
+.taverne-impression-number {
+    font-weight: 600;
+    font-size: 14px;
+    color: #1d2327;
+}
+
+.taverne-impression-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+.taverne-field-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.taverne-field-group label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #646970;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+}
+
+.taverne-field-group input,
+.taverne-field-group select {
+    width: 100%;
+    padding: 6px 8px;
+    border: 1px solid #8c8f94;
+    border-radius: 2px;
+    font-size: 12px;
+    background: #fff;
+}
+
+.taverne-status-lights {
+    display: flex;
+    gap: 8px;
+    padding-top: 4px;
+}
+
+.taverne-status-light {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.2s;
+    opacity: 0.3;
+}
+
+.taverne-status-light:hover {
+    opacity: 0.7;
+    transform: scale(1.1);
+}
+
+.taverne-status-light.active {
+    opacity: 1;
+    border-color: #1d2327;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.taverne-status-available {
+    background: #00a32a;
+}
+
+.taverne-status-artist {
+    background: #f0b849;
+}
+
+.taverne-status-sold {
+    background: #d63638;
+}
+
+.taverne-impression-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.taverne-add-impression {
+    width: 100%;
+    margin-top: 12px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 782px) {
+    .taverne-card-body,
+    .taverne-seo-body {
+        padding: 12px;
+    }
+    
+    .taverne-details-grid {
+        gap: 12px;
+    }
+    
+    .taverne-accordion-body {
+        padding: 12px;
+    }
+}

@@ -10,7 +10,11 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-// Register all plate taxonomies
+/**
+ * Register 9 plate taxonomies (non-hierarchical tags)
+ * technique, medium, study, motif, palette, traces, matrix, size, year
+ * All expose REST + GraphQL, rewrite disabled (headless frontend doesn't care)
+ */
 add_action('init', 'taverne_register_taxonomies');
 
 function taverne_register_taxonomies() {

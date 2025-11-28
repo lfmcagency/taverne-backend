@@ -9,7 +9,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Register custom fields for Plate type
+ * Extend Plate GraphQL type with 25+ custom fields
+ * Dimensions, pricing, SEO, computed totals, states connection
+ * Resolvers pull from post meta and Taverne Meta CRUD functions
  */
 function taverne_register_plate_fields() {
     

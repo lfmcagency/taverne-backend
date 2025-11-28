@@ -17,7 +17,10 @@ define('TAVERNE_EDITIONS_URL', plugin_dir_url(__FILE__));
 require_once TAVERNE_EDITIONS_PATH . 'includes/meta-boxes.php';
 require_once TAVERNE_EDITIONS_PATH . 'includes/ajax-handlers.php';
 
-// Enqueue admin assets (only on plate edit screens)
+/**
+ * Enqueue CSS/JS assets only on plate edit/new screens
+ * Includes media uploader, AJAX nonce, and plate_id for JavaScript
+ */
 add_action('admin_enqueue_scripts', 'taverne_editions_enqueue_assets');
 function taverne_editions_enqueue_assets($hook) {
     // Restrict to plate edit/new screens
@@ -52,7 +55,10 @@ function taverne_editions_enqueue_assets($hook) {
     ));
 }
 
-// Remove default editor for plates (use cards instead)
+/**
+ * Remove default WordPress editor for plates
+ * Plates use custom meta box UI instead of standard content editor
+ */
 add_action('init', 'taverne_remove_plate_editor');
 function taverne_remove_plate_editor() {
     remove_post_type_support('plate', 'editor');

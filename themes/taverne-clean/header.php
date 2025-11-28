@@ -1,3 +1,13 @@
+<?php
+/**
+ * Header Template
+ *
+ * Site header with logo/site-title and primary navigation menu. Outputs HTML5 doctype, head tags,
+ * and opening body tag. Custom logo set via Customize → Site Identity. Primary menu location.
+ * Includes wp_head() hook for enqueueing styles/scripts. Falls back to site name if no logo set.
+ * Opens <main> tag - closed in footer.php.
+ */
+?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>

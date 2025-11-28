@@ -1,161 +1,139 @@
-# Taverne Gallery WordPress Theme
-
-Clean, minimalist art gallery theme for Pol Taverne's print collection. Built lightweight and responsive with that crispy gallery aesthetic you wanted.
-
-## What's Inside
-
-A fully functional WordPress theme with:
-- **Responsive grid system** - Stacks on mobile, multi-column on larger screens
-- **Filter sidebar** - Shows on tablet/desktop, hides on mobile
-- **Clean typography** - Black serif headers, dark grey body text
-- **Minimal design** - White background, sporadic lines for structure
-- **Gallery-first layout** - Images are the star, everything else is supporting cast
-- **Custom Plate CPT support** - Works with your existing post types and taxonomies
-
-## File Structure
-
-```
-taverne-gallery/
-├── style.css              # Main stylesheet + theme header
-├── functions.php          # Theme setup, menus, helpers
-├── header.php            # Site header with logo & nav
-├── footer.php            # Site footer
-├── index.php             # Fallback template
-├── archive-plate.php     # Main gallery with filters
-├── single-plate.php      # Individual product/plate page
-├── taxonomy.php          # Taxonomy archives
-├── page.php              # Static pages (Artist, About, etc.)
-└── assets/
-    └── js/
-        └── main.js       # Minimal JS for interactions
-```
-
-## Installation
-
-1. **Zip it up:**
-   ```bash
-   # From C:\Users\Louis\poltaverne-codebase\imports\
-   zip -r taverne-gallery.zip theme/
-   ```
-
-2. **Upload to WordPress:**
-   - Go to Appearance → Themes → Add New → Upload Theme
-   - Choose your `taverne-gallery.zip`
-   - Activate it
-
-3. **Configure menus:**
-   - Appearance → Menus
-   - Create a "Primary Navigation" menu (Prints, A/R/T, About, Contact)
-   - Create a "Footer" menu (Privacy, Terms)
-   - Assign them to locations
-
-4. **Add logo:**
-   - Appearance → Customize → Site Identity → Logo
-   - Upload Pol's logo (works best around 400x100px)
-
-5. **Test permalinks:**
-   - Settings → Permalinks → "Post name"
-   - Save (flushes rewrites)
+# Taverne Clean Theme
 
 ## What It Does
 
-### Archive Pages (`/prints`)
-- Full gallery grid with all plates
-- Filter sidebar on larger screens (technique, motif, year, etc.)
-- Responsive: 1 column (mobile) → 2 (tablet) → 3-4 (desktop)
-- Shows year, size, technique below each thumbnail
+Minimal, responsive WordPress theme for displaying Pol Taverne's print collection. Features a filterable gallery grid with taxonomy-based filtering sidebar, individual plate detail views, and clean typography optimized for showcasing artwork. Works with the Plate custom post type and 9 custom taxonomies (technique, medium, study, motif, traces, palette, matrix, size, year).
 
-### Taxonomy Pages (`/prints/drypoint`)
-- Same grid layout with filters
-- Shows term name + description at top
-- Filtered to that specific taxonomy
+## Key Files
 
-### Single Plates (`/prints/rembrandt-variaties-1`)
-- Two-column layout (image left, details right on desktop)
-- Stacks on mobile
-- Shows all taxonomies grouped nicely
-- Ready for ACF fields (dimensions, price, editions - just uncomment in template)
+### Core Templates
+- **style.css** - Main stylesheet with typography, grid layout, responsive breakpoints
+- **functions.php** - Theme setup, image sizes, helper functions (taxonomies, filters, pagination)
+- **header.php** - Site header with logo and primary navigation menu
+- **footer.php** - Site footer with footer navigation and copyright
+- **index.php** - Fallback template for uncaught content types
 
-### Static Pages (`/artist`, `/researcher`)
-- Simple centered layout
-- Full-width content area
-- Perfect for A/R/T pages with Pol's writing
+### Plate Templates
+- **archive-page.php** - Main gallery view with filter sidebar and grid layout
+- **single-plate.php** - Individual plate detail page with image, specs, taxonomies
+- **taxonomy.php** - Filtered gallery view for specific taxonomy terms (e.g., /drypoint)
 
-## Customization
+### Static Pages
+- **page.php** - Template for static pages (Artist, About, Contact, etc.)
 
-### Colors
-In `style.css`, look for:
-- Headers: `#000000`
-- Body text: `#2C2C2C`
-- Active links: `#C74440` (warm red)
-- Background: `#FFFFFF`
-- Borders: `#E8E8E8`
+### Assets
+- **assets/js/main.js** - Image gallery interactions, smooth scroll, mobile menu placeholder
 
-### Typography
-Currently using Georgia (web-safe serif). To use a custom font:
-1. Add `@import` at top of `style.css`
-2. Update `font-family` in body and heading styles
+## Template Hierarchy
 
-### Breakpoints
-- Mobile: < 600px
-- Tablet: 600-900px
-- Desktop: 900-1200px
-- Large: 1200px+
+```
+/prints → archive-page.php
+/prints/example-plate → single-plate.php
+/prints/drypoint → taxonomy.php
+/artist → page.php
+```
 
-Filter sidebar kicks in at 900px.
+## Key Functions (functions.php)
 
-## Next Steps
+### Setup
+- `taverne_gallery_setup()` - Registers menus, image sizes, theme supports
+- `taverne_gallery_scripts()` - Enqueues CSS and JS
 
-1. **ACF Integration:**
-   - Uncomment the ACF field sections in `single-plate.php` (lines ~60-70)
-   - Set up field groups for dimensions, price, editions, states, impressions
-   - Theme will automatically display them
+### Helper Functions
+- `taverne_get_plate_taxonomies()` - Returns array of all plate taxonomies
+- `taverne_display_taxonomy_terms($post_id, $taxonomy, $label)` - Outputs taxonomy terms for a plate
+- `taverne_filter_sidebar()` - Generates filterable sidebar with all taxonomies
+- `taverne_pagination()` - Custom pagination with prev/next links
+- `taverne_breadcrumbs()` - Breadcrumb navigation
 
-2. **Image Gallery:**
-   - Add data attributes to thumbs: `data-full-image="url"`
-   - JS in `main.js` will handle the switching
+## Image Sizes
 
-3. **Import Products:**
-   - Use your existing `import_products.csv` and `taxonomies_import.xlsx`
-   - WP All Import or custom script
-   - Theme will display them automatically
+- **plate-thumb** - 400×400px (cropped) - Gallery grid cards
+- **plate-medium** - 800×800px - Mid-size display
+- **plate-large** - 1400×1400px - Single plate view
+- **plate-hero** - 1920×1920px - Full-size hero images
 
-4. **Tweak Filters:**
-   - Edit `taverne_filter_sidebar()` in `functions.php`
-   - Add/remove taxonomies from the array
-   - Reorder as needed
+## Taxonomies Used
 
-## What Works Right Now
+1. **plate_technique** - Printmaking technique (drypoint, etching, etc.)
+2. **plate_medium** - Medium used (zinc, lead, wood, etc.)
+3. **plate_study** - Study type
+4. **plate_motif** - Subject matter/motif
+5. **plate_palette** - Color palette used
+6. **plate_traces** - Trace information
+7. **plate_matrix** - Matrix type
+8. **plate_size** - Plate dimensions
+9. **plate_year** - Year created
 
-✅ Responsive grid (tested mobile → desktop)
-✅ Filter sidebar (shows/hides based on screen size)
-✅ All taxonomies displaying properly
-✅ Clean, minimal aesthetic
-✅ Fast loading (no bloat)
-✅ Semantic HTML5
-✅ Accessible navigation
-✅ WP menu system integrated
+## Menu Locations
 
-## What Needs Your Custom Plugin
+- **primary** - Main navigation (header)
+- **footer** - Footer links (privacy, terms)
 
-- Custom meta fields (dimensions, price, editions)
-- States/impressions management
-- Cart/checkout functionality
-- Any e-commerce features
+Set up in: Appearance → Menus
 
-Theme just displays what you give it - your `taverne-core` plugin handles the data structure.
+## Responsive Breakpoints
 
-## Support
+```css
+Mobile:  < 600px  (1 column)
+Tablet:  600-900px (2 columns)
+Desktop: 900-1200px (3 columns + sidebar)
+Large:   1200px+ (4 columns + sidebar)
+```
 
-Built specifically for Pol Taverne's gallery. Pairs with:
-- `taverne-core` plugin (CPT/taxonomies)
-- Your custom meta plugin
-- WPGraphQL for Next.js frontend
+Filter sidebar appears at 900px+
 
+## Color Scheme
 
+- **Headers:** #000000 (black)
+- **Body:** #2C2C2C (dark grey)
+- **Links:** #C74440 (warm red)
+- **Background:** #FFFFFF (white)
+- **Borders:** #E8E8E8 (light grey)
 
----
+Edit in style.css
 
-**Version:** 1.0.0  
-**Author:** Louis Faucher  
-**Built:** November 2025
+## Typography
+
+- **Headers:** Georgia (serif)
+- **Body:** Georgia (serif)
+- **Base size:** 16px
+- **Line height:** 1.6
+
+## Which File to Edit
+
+| Task | File | Line Range |
+|------|------|------------|
+| Change colors | style.css | Throughout |
+| Add/remove taxonomies from filter | functions.php | 162-174, 207-238 |
+| Modify gallery grid layout | archive-page.php | 25-66 |
+| Change single plate layout | single-plate.php | 12-112 |
+| Edit header/logo | header.php | 11-42 |
+| Edit footer content | footer.php | 3-23 |
+| Add custom image sizes | functions.php | 18-22 |
+| Modify pagination | functions.php | 135-157 |
+| Change grid breakpoints | style.css | Media queries |
+| Add ACF fields display | single-plate.php | 46-89 |
+
+## Dependencies
+
+- **WordPress:** 5.0+
+- **Required Plugin:** taverne-core (Plate CPT + taxonomies)
+- **Optional:** ACF Pro (for custom fields)
+
+## Installation
+
+1. Upload to wp-content/themes/
+2. Activate in Appearance → Themes
+3. Set permalinks to "Post name"
+4. Configure menus (primary + footer)
+5. Upload logo (Appearance → Customize)
+
+## Notes
+
+- No jQuery dependency (vanilla JS)
+- No page builder required
+- Designed for WPGraphQL compatibility
+- ACF field sections commented out in single-plate.php (lines 50-64)
+- Removes WP bloat (emojis, generator tags, etc.)
+- Semantic HTML5 markup throughout

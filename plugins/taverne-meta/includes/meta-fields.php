@@ -7,7 +7,9 @@
 if (!defined('ABSPATH')) exit;
 
 /**
- * Register all plate meta fields
+ * Register 15+ plate meta fields for REST/GraphQL exposure
+ * Dimensions, pricing, computed fields (size, totals), SEO fields
+ * All have sanitization callbacks and REST visibility
  */
 add_action('init', 'taverne_register_plate_meta_fields');
 function taverne_register_plate_meta_fields() {
@@ -159,8 +161,9 @@ function taverne_register_plate_meta_fields() {
 }
 
 /**
- * Update all computed fields for a plate
- * Call this after any state/impression changes
+ * Recalculate all computed fields: size, area, totals, palette
+ * Called automatically after CRUD operations on states/impressions
+ * Size based on WIDTH only (S<38cm, M 38-70cm, L>70cm)
  */
 function taverne_update_plate_computed_fields($plate_id) {
     if (get_post_type($plate_id) !== 'plate') {
@@ -212,8 +215,8 @@ function taverne_update_plate_computed_fields($plate_id) {
 }
 
 /**
- * Hook to update computed fields when post is saved
- * This catches dimension/price changes from other plugins
+ * Auto-update computed fields when width/height meta changes
+ * Triggers on any meta update, but only acts on _plate_width/_plate_height
  */
 add_action('updated_post_meta', 'taverne_maybe_update_computed_on_meta_change', 10, 4);
 function taverne_maybe_update_computed_on_meta_change($meta_id, $object_id, $meta_key, $meta_value) {

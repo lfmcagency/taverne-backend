@@ -24,7 +24,10 @@ require_once TAVERNE_CPT_PATH . 'includes/post-types.php';
 require_once TAVERNE_CPT_PATH . 'includes/taxonomies.php';
 require_once TAVERNE_CPT_PATH . 'includes/csv-importer.php';
 
-// Disable block editor for plate CPT
+/**
+ * Disable Gutenberg editor for Plate CPT
+ * Plates use custom meta boxes from Taverne Editions plugin instead of block editor
+ */
 add_filter('use_block_editor_for_post_type', 'taverne_disable_gutenberg_for_plate', 10, 2);
 function taverne_disable_gutenberg_for_plate($use_block_editor, $post_type) {
     if ($post_type === 'plate') {
@@ -33,13 +36,16 @@ function taverne_disable_gutenberg_for_plate($use_block_editor, $post_type) {
     return $use_block_editor;
 }
 
-// Activation hook - flush rewrite rules
+/**
+ * Plugin activation: Register post types/taxonomies and flush permalinks
+ * Called once on plugin activation to ensure permalink structure is updated
+ */
 register_activation_hook(__FILE__, 'taverne_cpt_activate');
 function taverne_cpt_activate() {
     // Trigger post type registration
     taverne_register_post_types();
     taverne_register_taxonomies();
-    
+
     // Flush permalinks
     flush_rewrite_rules();
 }

@@ -9,7 +9,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Register State type and its fields
+ * Register State custom object type with 13 fields + impressions connection
+ * Data from wp_plate_states table, includes root query state(id: Int)
  */
 function taverne_register_state_type() {
     

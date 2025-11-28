@@ -7,7 +7,9 @@
 if (!defined('ABSPATH')) exit;
 
 /**
- * Create custom tables on activation
+ * Create wp_plate_states and wp_plate_impressions tables
+ * States: Variable editions of a plate (state 1, 2, 3...)
+ * Impressions: Individual prints within each state with pricing/availability
  */
 function taverne_create_custom_tables() {
     global $wpdb;
@@ -67,7 +69,9 @@ function taverne_create_custom_tables() {
 // ============================================
 
 /**
- * Create a new state
+ * Create new state for a plate (returns state_id or WP_Error)
+ * Auto-assigns next state_number, default title "State N"
+ * Updates computed fields on parent plate after creation
  */
 function taverne_create_state($plate_id, $data = array()) {
     global $wpdb;
@@ -99,7 +103,8 @@ function taverne_create_state($plate_id, $data = array()) {
 }
 
 /**
- * Get a single state by ID
+ * Get single state by ID (returns object or null)
+ * Returns row from wp_plate_states table with all fields
  */
 function taverne_get_state($state_id) {
     global $wpdb;
@@ -108,7 +113,9 @@ function taverne_get_state($state_id) {
 }
 
 /**
- * Get all states for a plate
+ * Get all states for a plate (returns array of objects)
+ * Default sort: sort_order ASC (manual ordering)
+ * Options: id, state_number, sort_order, created_at
  */
 function taverne_get_states($plate_id, $orderby = 'sort_order', $order = 'ASC') {
     global $wpdb;
@@ -127,7 +134,9 @@ function taverne_get_states($plate_id, $orderby = 'sort_order', $order = 'ASC') 
 }
 
 /**
- * Update a state
+ * Update state fields (title, excerpt, description, featured_image_id, etc)
+ * Only updates provided fields, sanitizes all inputs
+ * Returns true or WP_Error, updates computed fields on parent plate
  */
 function taverne_update_state($state_id, $data = array()) {
     global $wpdb;
@@ -182,7 +191,8 @@ function taverne_update_state($state_id, $data = array()) {
 }
 
 /**
- * Delete a state (and all its impressions)
+ * Delete state AND cascade delete all impressions in that state
+ * Returns true or WP_Error, updates computed fields on parent plate
  */
 function taverne_delete_state($state_id) {
     global $wpdb;
@@ -239,7 +249,9 @@ function taverne_get_state_count($plate_id) {
 // ============================================
 
 /**
- * Create a new impression
+ * Create new impression within a state (returns impression_id or WP_Error)
+ * Auto-assigns next impression_number for that state
+ * Fields: image_id, color, price, availability, changes, notes
  */
 function taverne_create_impression($plate_id, $state_id, $data = array()) {
     global $wpdb;
@@ -288,7 +300,8 @@ function taverne_get_impression($impression_id) {
 }
 
 /**
- * Get all impressions for a state
+ * Get all impressions for a specific state (returns array of objects)
+ * Default sort: sort_order ASC (manual ordering)
  */
 function taverne_get_impressions_by_state($state_id, $orderby = 'sort_order', $order = 'ASC') {
     global $wpdb;

@@ -16,7 +16,9 @@ require_once TAVERNE_GRAPHQL_PATH . 'includes/types/research-type.php';
 require_once TAVERNE_GRAPHQL_PATH . 'includes/types/teaching-type.php';
 
 /**
- * Register all custom types on GraphQL schema initialization
+ * Register all custom GraphQL types and fields on schema build
+ * Hooks into graphql_register_types to extend WPGraphQL schema
+ * Registers State, Impression types + extends Plate, Research, Teaching
  */
 add_action( 'graphql_register_types', function() {
     

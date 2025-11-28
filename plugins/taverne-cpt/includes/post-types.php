@@ -10,7 +10,11 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-// Register all custom post types
+/**
+ * Register 3 custom post types: Plate, Research, Teaching
+ * All expose REST + GraphQL APIs. Plate gets 9 taxonomies.
+ * Research and Teaching get category taxonomies (hierarchical)
+ */
 add_action('init', 'taverne_register_post_types');
 
 function taverne_register_post_types() {

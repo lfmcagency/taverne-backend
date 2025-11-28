@@ -10,7 +10,10 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-// Add admin menu page
+/**
+ * Add CSV Import/Export admin page under Plates menu
+ * Bulk manage taxonomy terms with metadata (title, description, thumbnail)
+ */
 add_action('admin_menu', 'taverne_csv_importer_menu');
 
 function taverne_csv_importer_menu() {
@@ -83,7 +86,11 @@ function taverne_csv_importer_page() {
     <?php
 }
 
-// Handle CSV import
+/**
+ * Process CSV upload and bulk import/update taxonomy terms
+ * Format: taxonomy,slug,name,description,image_url
+ * Validates terms exist, downloads images to media library, shows errors
+ */
 function taverne_handle_csv_import() {
     // Security checks
     if (!isset($_POST['taverne_import_nonce']) || !wp_verify_nonce($_POST['taverne_import_nonce'], 'taverne_import_terms')) {
@@ -238,7 +245,11 @@ function taverne_handle_csv_import() {
     }
 }
 
-// Handle term image - download to media library
+/**
+ * Download image from URL and attach to taxonomy term as thumbnail
+ * Uses media_handle_sideload to add to WP media library
+ * Returns attachment ID or WP_Error on failure
+ */
 function taverne_handle_term_image($term_id, $image_url) {
     // Check if URL is valid
     if (empty($image_url) || !filter_var($image_url, FILTER_VALIDATE_URL)) {
@@ -281,7 +292,11 @@ function taverne_handle_term_image($term_id, $image_url) {
     return $attachment_id;
 }
 
-// Handle CSV export
+/**
+ * Export all plate_* taxonomy terms to CSV download
+ * Includes term metadata (name, slug, description, image URL)
+ * Streams directly to browser, doesn't save file on server
+ */
 function taverne_handle_csv_export() {
     // Security checks
     if (!isset($_POST['taverne_export_nonce']) || !wp_verify_nonce($_POST['taverne_export_nonce'], 'taverne_export_terms')) {

@@ -23,7 +23,8 @@ define( 'TAVERNE_GRAPHQL_PATH', plugin_dir_path( __FILE__ ) );
 define( 'TAVERNE_GRAPHQL_URL', plugin_dir_url( __FILE__ ) );
 
 /**
- * Check if WPGraphQL is active
+ * Validate plugin dependencies: WPGraphQL and Taverne Meta
+ * Shows admin notices if dependencies missing, returns false to halt init
  */
 function taverne_graphql_check_dependencies() {
     if ( ! class_exists( 'WPGraphQL' ) ) {
@@ -53,7 +54,8 @@ function taverne_graphql_check_dependencies() {
 }
 
 /**
- * Initialize the plugin
+ * Initialize GraphQL type registration on plugins_loaded hook
+ * Checks dependencies first, then loads type registration files
  */
 function taverne_graphql_init() {
     // Check dependencies

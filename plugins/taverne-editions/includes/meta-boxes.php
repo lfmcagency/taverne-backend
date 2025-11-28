@@ -21,7 +21,10 @@ function taverne_meta_boxes_inline_css() {
     }
 }
 
-// Register meta boxes
+/**
+ * Register 4 meta boxes for plate admin UI
+ * Plate Details, Techniques & Classifications, States & Impressions, SEO
+ */
 add_action('add_meta_boxes', 'taverne_register_meta_boxes');
 function taverne_register_meta_boxes() {
     // Plate Details card (below content)
@@ -66,7 +69,8 @@ function taverne_register_meta_boxes() {
 }
 
 /**
- * Render Plate Details meta box
+ * Render Plate Details meta box: description, dimensions, price, year, matrix, study
+ * Includes WYSIWYG editor, taxonomy dropdowns, computed size display (readonly)
  */
 function taverne_render_plate_details_box($post) {
     // Nonce for security

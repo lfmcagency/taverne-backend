@@ -11,7 +11,9 @@ if (!defined('ABSPATH')) exit;
 // ============================================
 
 /**
- * Add new state
+ * AJAX: Create new state for a plate
+ * Called from admin.js when user clicks "Add New State"
+ * Returns state_id and state_number or JSON error
  */
 add_action('wp_ajax_taverne_add_state', 'taverne_ajax_add_state');
 function taverne_ajax_add_state() {

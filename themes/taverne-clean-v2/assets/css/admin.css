@@ -1,0 +1,456 @@
+/**
+ * Taverne Clean Theme - admin.css
+ * 
+ * Styling for Taverne Editions admin UI: card-based meta boxes,
+ * status lights, responsive grids, AJAX feedback animations
+ * Enqueued only on plate edit screens
+ * 
+ * @package Taverne_Clean
+ * @version 2.0
+ */
+
+/* ==========================================================================
+   1. RESET & TOKENS
+   ========================================================================== */
+
+.taverne-meta-box *,
+.taverne-meta-box *::before,
+.taverne-meta-box *::after {
+    box-sizing: border-box;
+}
+
+.taverne-meta-box {
+    --admin-accent: #C74440;
+    --status-green: #4CAF50;
+    --status-orange: #FF9800;
+    --status-red: #F44336;
+    --card-bg: #f9f8f4;
+    --border-light: #e5e5e5;
+    --ink: #1a1a1a;
+    --paper: #ffffff;
+    --stone: #e5e5e5;
+    --serif: Georgia, 'Times New Roman', serif;
+    --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-6: 1.5rem;
+    --radius: 8px;
+    --radius-sm: 4px;
+    --transition: 0.2s ease;
+}
+
+/* ==========================================================================
+   2. META BOX CONTAINER
+   ========================================================================== */
+
+.taverne-meta-box {
+    background: var(--paper);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius);
+    overflow: hidden;
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.taverne-meta-box .postbox-header,
+.taverne-meta-box .hndle {
+    background: var(--ink);
+    color: var(--paper);
+    padding: var(--space-4);
+    font-weight: 600;
+    font-size: 14px;
+    border: none;
+}
+
+.taverne-meta-box .inside {
+    padding: var(--space-4);
+}
+
+/* ==========================================================================
+   3. CARD COMPONENTS
+   ========================================================================== */
+
+.taverne-state-card,
+.taverne-impression-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius);
+    margin-bottom: var(--space-4);
+    overflow: hidden;
+}
+
+.taverne-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-3) var(--space-4);
+    background: var(--paper);
+    border-bottom: 1px solid var(--border-light);
+}
+
+.taverne-card-header h4 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.taverne-card-body {
+    padding: var(--space-4);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: var(--space-4);
+}
+
+.taverne-card-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+    background: var(--paper);
+    border-top: 1px solid var(--border-light);
+}
+
+/* ==========================================================================
+   4. FORM FIELDS
+   ========================================================================== */
+
+.taverne-field-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.taverne-field-group label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.taverne-field-group input[type="text"],
+.taverne-field-group input[type="number"],
+.taverne-field-group textarea,
+.taverne-field-group select {
+    width: 100%;
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.taverne-field-group input:focus,
+.taverne-field-group textarea:focus,
+.taverne-field-group select:focus {
+    outline: none;
+    border-color: var(--admin-accent);
+    box-shadow: 0 0 0 2px rgba(199, 68, 64, 0.15);
+}
+
+.taverne-field-group textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+/* Field updated flash */
+.field-updated {
+    animation: fieldPulse 0.5s ease;
+}
+
+@keyframes fieldPulse {
+    0%, 100% { background-color: transparent; }
+    50% { background-color: rgba(76, 175, 80, 0.2); }
+}
+
+/* ==========================================================================
+   5. STATUS LIGHTS
+   ========================================================================== */
+
+.taverne-status-light {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+    border: 2px solid var(--paper);
+    box-shadow: 0 0 0 1px var(--border-light);
+    transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.taverne-status-light:hover {
+    transform: scale(1.2);
+}
+
+.taverne-status-light.available {
+    background-color: var(--status-green);
+}
+
+.taverne-status-light.artist {
+    background-color: var(--status-orange);
+}
+
+.taverne-status-light.sold {
+    background-color: var(--status-red);
+}
+
+.taverne-status-light.pulse {
+    animation: statusPulse 0.5s ease;
+}
+
+@keyframes statusPulse {
+    0%, 100% { box-shadow: 0 0 0 1px var(--border-light); }
+    50% { box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.3); }
+}
+
+/* ==========================================================================
+   6. IMAGE UPLOAD
+   ========================================================================== */
+
+.taverne-upload-wrapper {
+    position: relative;
+}
+
+.taverne-upload-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100px;
+    border: 2px dashed var(--border-light);
+    border-radius: var(--radius);
+    background: var(--paper);
+    cursor: pointer;
+    transition: border-color var(--transition), background var(--transition);
+    text-align: center;
+    color: var(--ink);
+    font-size: 13px;
+}
+
+.taverne-upload-trigger:hover {
+    border-color: var(--admin-accent);
+    background: rgba(199, 68, 64, 0.03);
+}
+
+.taverne-upload-preview {
+    max-width: 100px;
+    max-height: 100px;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-light);
+}
+
+.taverne-remove-image {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 20px;
+    height: 20px;
+    background: var(--status-red);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 12px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ==========================================================================
+   7. BUTTONS
+   ========================================================================== */
+
+.taverne-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background var(--transition), transform var(--transition);
+    border: none;
+    text-decoration: none;
+}
+
+.taverne-btn:hover {
+    transform: translateY(-1px);
+}
+
+.taverne-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.taverne-add-btn,
+.taverne-add-state,
+.taverne-add-impression {
+    background: var(--admin-accent);
+    color: white;
+}
+
+.taverne-add-btn:hover,
+.taverne-add-state:hover,
+.taverne-add-impression:hover {
+    background: #a83835;
+}
+
+.taverne-delete-btn {
+    background: var(--status-red);
+    color: white;
+    padding: var(--space-1) var(--space-2);
+    font-size: 12px;
+}
+
+.taverne-delete-btn:hover {
+    background: #d32f2f;
+}
+
+/* ==========================================================================
+   8. DRAG & DROP
+   ========================================================================== */
+
+.drag-handle {
+    cursor: grab;
+    padding: var(--space-2);
+    color: var(--stone);
+    transition: color var(--transition);
+}
+
+.drag-handle:hover {
+    color: var(--ink);
+}
+
+.drag-handle:active {
+    cursor: grabbing;
+}
+
+.sortable-placeholder {
+    background: var(--stone);
+    opacity: 0.5;
+    min-height: 60px;
+    border: 2px dashed var(--border-light);
+    border-radius: var(--radius);
+    margin-bottom: var(--space-4);
+}
+
+.ui-sortable-helper {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: rotate(1deg);
+}
+
+/* ==========================================================================
+   9. CHECKBOX GRID (Taxonomies)
+   ========================================================================== */
+
+.taverne-checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: var(--space-2);
+}
+
+.taverne-checkbox-grid label {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2);
+    background: var(--paper);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: border-color var(--transition), background var(--transition);
+    font-size: 13px;
+}
+
+.taverne-checkbox-grid label:hover {
+    border-color: var(--admin-accent);
+}
+
+.taverne-checkbox-grid input[type="checkbox"] {
+    margin: 0;
+}
+
+.taverne-checkbox-grid input[type="checkbox"]:checked + span {
+    font-weight: 600;
+}
+
+/* ==========================================================================
+   10. LISTS
+   ========================================================================== */
+
+.taverne-states-list,
+.taverne-impression-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.taverne-impression-list {
+    padding-left: var(--space-4);
+    margin-top: var(--space-4);
+    border-left: 2px solid var(--border-light);
+}
+
+/* ==========================================================================
+   11. NOTICES
+   ========================================================================== */
+
+.taverne-meta-box .notice {
+    margin: var(--space-4) 0 0;
+    border-radius: var(--radius-sm);
+}
+
+/* ==========================================================================
+   12. RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 782px) {
+    .taverne-card-body {
+        grid-template-columns: 1fr;
+    }
+    
+    .taverne-checkbox-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .taverne-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-2);
+    }
+    
+    .taverne-card-footer {
+        flex-direction: column;
+    }
+    
+    .taverne-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* ==========================================================================
+   13. WP ADMIN OVERRIDES
+   ========================================================================== */
+
+#poststuff .taverne-meta-box .inside {
+    margin: 0;
+    padding: var(--space-4);
+}
+
+.taverne-meta-box .hndle {
+    cursor: default;
+}
+
+.taverne-meta-box .handlediv {
+    display: none;
+}
